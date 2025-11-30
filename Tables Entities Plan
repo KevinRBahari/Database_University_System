@@ -1,0 +1,32 @@
+Key Entities (11 Main Tables):
+Core Academic Entities:
+
+STUDENTS - Student personal information and academic details
+INSTRUCTORS - Faculty information
+COURSES - Course catalog
+COURSE_SECTIONS - Specific course offerings per semester
+DEPARTMENTS - Academic departments/colleges
+
+Scheduling & Registration:
+
+SEMESTERS - Academic terms
+TIME_SLOTS - Class meeting times
+ENROLLMENTS - Student course registrations
+
+Business Rules:
+
+COURSE_PREREQUISITES - Prerequisite requirements
+RETAKE_REQUESTS - Retake approval workflow
+
+System Management:
+
+USERS - Authentication and authorization
+ENROLLMENT_STATUS - Lookup table for enrollment states
+
+Key Relationships Shown:
+
+Students ↔ Enrollments ↔ Course Sections (Many-to-Many through Enrollments)
+Courses ↔ Course Prerequisites (Self-referencing for prerequisite chains)
+Instructors ↔ Course Sections (One instructor per section)
+Departments ↔ Students/Instructors/Courses (All belong to departments)
+Course Sections ↔ Time Slots (One section can have multiple time slots)
