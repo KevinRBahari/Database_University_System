@@ -3,6 +3,11 @@
     <div class="login-container">
       <h1>Login</h1>
       <LoginForm @submit="handleLogin" />
+
+      <div class="register-link">
+        Don't have an account?
+        <router-link to="/register" class="link">Register here</router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -10,14 +15,21 @@
 <script setup>
 import LoginForm from '@/components/auth/LoginForm.vue'
 import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/components/stores/auth'
 
 const router = useRouter()
+const authStore = useAuthStore()
 
-const handleLogin = (credentials) => {
-  // Handle login logic
-  console.log('Login with:', credentials)
-  router.push('/dashboard')
+const handleLogin = async (credentials) => {
+  const { student_id, password } = credentials
+  const result = await authStore.login(student_id, password)
+  
+  if (result.success) {
+    router.push('/dashboard')  // Only redirect on success
+  }
+  // Handle errors through the store's error state
 }
+
 </script>
 
 <style scoped>
@@ -36,5 +48,24 @@ const handleLogin = (credentials) => {
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   width: 100%;
   max-width: 400px;
+}
+
+.register-link {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.register-link .link {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 0.25rem;
+}
+
+.register-link .link:hover {
+  color: #764ba2;
+  text-decoration: underline;
 }
 </style>

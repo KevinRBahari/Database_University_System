@@ -44,6 +44,10 @@
               <span class="nav-icon">👤</span>
               <span>Login</span>
             </router-link>
+            <router-link to="/register" class="nav-link register-btn">
+              <span class="nav-icon">📝</span>
+              <span>Register</span>
+            </router-link>
           </div>
         </div>
 
