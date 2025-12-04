@@ -50,8 +50,6 @@ export const useAuthStore = defineStore('auth', () => {
     error.value = null
 
     try {
-      // Use database login for local storage
-      // Change to authService.login when you have a real backend
       const data = await authService.databaseLogin(studentId, password)
 
       user.value = data.user
@@ -116,17 +114,14 @@ export const useAuthStore = defineStore('auth', () => {
   initialize()
 
   return {
-    // State
     user,
     token,
     loading,
     error,
-    // Getters
     isAuthenticated,
     currentUser,
     studentId,
     studentName,
-    // Actions
     login,
     register,
     logout,

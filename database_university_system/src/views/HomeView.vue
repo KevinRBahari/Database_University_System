@@ -49,7 +49,7 @@
   gap: 3rem;
   align-items: center;
   padding: 4rem 2rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #667eea;
   color: white;
   min-height: 60vh;
 }
@@ -201,36 +201,6 @@
 .feature-description {
   color: #6b7280;
   line-height: 1.6;
-}
-
-/* CTA Section */
-.cta {
-  background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
-  color: white;
-  padding: 4rem 2rem;
-  text-align: center;
-}
-
-.cta-container {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.cta h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.cta p {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-  opacity: 0.9;
-}
-
-.cta-actions {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
 }
 
 /* Responsive Design */
