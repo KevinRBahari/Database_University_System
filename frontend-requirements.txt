@@ -1,0 +1,42 @@
+# Frontend Dependencies
+# Vue.js 3 + Vite Frontend for University Database System
+
+# Core Dependencies
+vue@^3.5.25
+vue-router@^4.6.3
+pinia@^3.0.4
+
+# Build and Development Tools
+vite@^7.2.4
+@vitejs/plugin-vue@^6.0.2
+
+# Authentication and Security
+bcryptjs@^3.0.3
+
+# Database (for potential client-side operations)
+sqlite3@^5.1.7
+
+# Development Dependencies
+@eslint/js@^9.39.1
+@vue/eslint-config-prettier@^10.2.0
+eslint@^9.39.1
+eslint-plugin-vue@~10.5.1
+prettier@3.6.2
+
+# Testing Dependencies
+@vue/test-utils@^2.4.6
+@vitest/eslint-plugin@^1.5.0
+jsdom@^27.2.0
+vitest@^4.0.14
+
+# E2E Testing
+@nightwatch/vue@^3.1.2
+nightwatch@^3.12.3
+chromedriver@^142.0.3
+geckodriver@^6.1.0
+vite-plugin-nightwatch@^0.4.6
+
+# Development Utilities
+globals@^16.5.0
+ts-node@^10.9.2
+vite-plugin-vue-devtools@^8.0.5
