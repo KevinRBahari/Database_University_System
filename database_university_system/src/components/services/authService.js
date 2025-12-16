@@ -1,35 +1,41 @@
-// API Base URL - change this to your actual backend URL
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api'
 
-// Helper function to handle API responses
+//Helper function to handle API responses
 const handleResponse = async (response) => {
-  const data = await response.json()
+  let data
+  try {
+    data = await response.json()
+  } catch (e) {
+    throw new Error('Server returned invalid response')
+  }
   
   if (!response.ok) {
-    const error = (data && data.message) || response.statusText
+    const error = (data && data.message) || response.statusText || 'Request failed'
     throw new Error(error)
   }
   
   return data
 }
 
-// Login user with Student ID
-export const login = async (studentId, password) => {
+//Login user
+export const login = async (userId, password) => {
   try {
+    console.log('Attempting login to:', `${API_URL}/auth/login`)
+    
     const response = await fetch(`${API_URL}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ 
-        student_id: studentId, 
+        user_id: userId, 
         password: password 
       })
     })
 
     const data = await handleResponse(response)
     
-    // Store token and user data
+    //Store token and user data
     if (data.token) {
       localStorage.setItem('authToken', data.token)
       localStorage.setItem('user', JSON.stringify(data.user))
@@ -37,29 +43,27 @@ export const login = async (studentId, password) => {
     
     return data
   } catch (error) {
+    console.error('Login error:', error)
     throw new Error(error.message || 'Login failed')
   }
 }
 
-// Register new student (if needed)
-export const register = async (studentId, name, email, password) => {
+//Register new user
+export const register = async (userData) => {
   try {
+    console.log('Attempting registration to:', `${API_URL}/auth/register`)
+    
     const response = await fetch(`${API_URL}/auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ 
-        student_id: studentId, 
-        name, 
-        email, 
-        password 
-      })
+      body: JSON.stringify(userData)
     })
 
     const data = await handleResponse(response)
     
-    // Auto-login after registration
+    //Auto login after registration
     if (data.token) {
       localStorage.setItem('authToken', data.token)
       localStorage.setItem('user', JSON.stringify(data.user))
@@ -67,17 +71,18 @@ export const register = async (studentId, name, email, password) => {
     
     return data
   } catch (error) {
+    console.error('Registration error:', error)
     throw new Error(error.message || 'Registration failed')
   }
 }
 
-// Logout user
+//Logout user
 export const logout = () => {
   localStorage.removeItem('authToken')
   localStorage.removeItem('user')
 }
 
-// Get current user from localStorage
+//Get current user from localStorage
 export const getCurrentUser = () => {
   const userStr = localStorage.getItem('user')
   if (userStr) {
@@ -90,17 +95,17 @@ export const getCurrentUser = () => {
   return null
 }
 
-// Get auth token
+//Get auth token
 export const getAuthToken = () => {
   return localStorage.getItem('authToken')
 }
 
-// Check if user is authenticated
+//Check if user is authenticated
 export const isAuthenticated = () => {
   return !!getAuthToken()
 }
 
-// Verify token (call your backend to validate)
+//Verify token
 export const verifyToken = async () => {
   const token = getAuthToken()
   
@@ -119,11 +124,12 @@ export const verifyToken = async () => {
 
     return response.ok
   } catch (error) {
+    console.error('Token verification error:', error)
     return false
   }
 }
 
-// Get student profile
+//Get student profile
 export const getStudentProfile = async () => {
   const token = getAuthToken()
   
@@ -142,6 +148,7 @@ export const getStudentProfile = async () => {
 
     return await handleResponse(response)
   } catch (error) {
+    console.error('Profile fetch error:', error)
     throw new Error(error.message || 'Failed to fetch profile')
   }
 }

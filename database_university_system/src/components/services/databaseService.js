@@ -2,15 +2,15 @@ import sqlite3 from 'sqlite3'
 import path from 'path'
 import bcrypt from 'bcryptjs'
 
-// Set up SQLite database
+//SQLite database
 const DB_PATH = path.join(process.cwd(), 'database_university.db')
 const db = new sqlite3.Database(DB_PATH)
 
-// Initialize database and create tables
+// Init database and create table 
 export const initializeDatabase = () => {
   return new Promise((resolve, reject) => {
     db.serialize(() => {
-      // Create users table
+      //Create users table
       db.run(`
         CREATE TABLE IF NOT EXISTS users (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -30,7 +30,7 @@ export const initializeDatabase = () => {
           return
         }
 
-        // Create some mock data if table is empty
+        //Create some mock data if empty
         db.get("SELECT COUNT(*) as count FROM users", (err, row) => {
           if (err) {
             reject(err)
@@ -38,7 +38,7 @@ export const initializeDatabase = () => {
           }
 
           if (row.count === 0) {
-            // Insert default admin/mock user
+            //Insert default admin/mock user
             const defaultUsers = [
               {
                 student_id: '12345',
@@ -83,7 +83,7 @@ export const initializeDatabase = () => {
   })
 }
 
-// User operations
+//User operations
 export const findUserByStudentId = (studentId) => {
   return new Promise((resolve, reject) => {
     db.get('SELECT * FROM users WHERE student_id = ?', [studentId], (err, row) => {
@@ -127,14 +127,14 @@ export const createUser = (userData) => {
           return
         }
 
-        // Return user data (without password)
+        //Return user data (without password)
         db.get('SELECT * FROM users WHERE id = ?', [this.lastID], (err, row) => {
           if (err) {
             reject(err)
             return
           }
 
-          // Remove password hash from response
+          //Remove password hash from response
           const { password_hash, ...userWithoutPassword } = row
           resolve(userWithoutPassword)
         })

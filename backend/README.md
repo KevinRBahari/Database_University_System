@@ -83,7 +83,7 @@ CREATE TABLE enrollments (
 ## Setup Instructions
 
 ### Prerequisites
-- Node.js (v20 or later)
+- Node.js (v20)
 - npm or yarn
 
 ### Installation
@@ -104,6 +104,12 @@ CREATE TABLE enrollments (
    ```
 
 The server will start on `http://localhost:3000` by default.
+
+### Compile Server
+1. **Compile Server:**
+   ```bash
+   node server.js
+   ```
 
 ### Environment Variables
 
@@ -151,8 +157,6 @@ curl -X POST http://localhost:3000/api/auth/register \
 ```
 
 ## Integration with Frontend
-
-
 
 The backend is designed to work with the Vue.js frontend in the `../database_university_system` directory.
 

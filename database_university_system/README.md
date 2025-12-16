@@ -24,6 +24,11 @@ See [Vite Configuration Reference](https://vite.dev/config/).
 ```sh
 npm install
 ```
+## Project Setup to install vite
+
+```sh
+npm install vite
+```
 
 ### Compile and Hot-Reload for Development
 
