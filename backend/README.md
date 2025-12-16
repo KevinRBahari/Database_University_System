@@ -152,6 +152,8 @@ curl -X POST http://localhost:3000/api/auth/register \
 
 ## Integration with Frontend
 
+
+
 The backend is designed to work with the Vue.js frontend in the `../database_university_system` directory.
 
 1. Start the backend: `npm run dev`
